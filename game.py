@@ -47,7 +47,6 @@ class PacmanGame:
         self.path_length = 0
 
     def generate_maze(self, width, height):
-        """Generate a maze using a simplified algorithm"""
         # Create a grid filled with walls
         maze = [[1 for _ in range(width)] for _ in range(height)]
 
@@ -172,17 +171,16 @@ class PacmanGame:
         pygame.display.flip()
 
     def run_search(self):
-        """Run the selected search algorithm"""
         self.search_completed = False
         self.path_found = False
-        
+
         if self.algorithm == "BFS":
             path, path_cost, completed, found = self.search.bfs_search(self.pacman_pos, self.foods)
         elif self.algorithm == "DFS":
             path, path_cost, completed, found = self.search.dfs_search(self.pacman_pos, self.foods)
         elif self.algorithm == "Greedy":
             path, path_cost, completed, found = self.search.greedy_search(self.pacman_pos, self.foods)
-        
+
         # Update game state with search results
         self.current_path = path
         self.path_length = path_cost
@@ -193,7 +191,6 @@ class PacmanGame:
         self.nodes_expanded = self.search.nodes_expanded
 
     def update(self):
-        """Update game state"""
         # If we have a path and not in step mode, move along the path
         if self.path_found and not self.step_mode:
             if self.step_index < len(self.current_path):
@@ -224,7 +221,6 @@ class PacmanGame:
                 self.run_search()
 
     def handle_events(self):
-        """Handle pygame events"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -251,7 +247,7 @@ class PacmanGame:
 
                 elif event.key == pygame.K_v:  # Toggle visualization
                     self.visualize_search = not self.visualize_search
-                    
+
                 elif event.key == pygame.K_SPACE:  # Step mode
                     self.step_mode = not self.step_mode
                     if self.step_mode and self.path_found:
@@ -265,7 +261,6 @@ class PacmanGame:
                             self.step_index += 1
 
     def run(self):
-        """Main game loop"""
         # Initial search
         self.run_search()
 

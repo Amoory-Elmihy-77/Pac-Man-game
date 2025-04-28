@@ -16,7 +16,7 @@ ORANGE = (255, 165, 0)
 CELL_SIZE = 30
 WINDOW_WIDTH = 900
 WINDOW_HEIGHT = 600
-FPS = 60
+FPS = 50
 
 # Directions
 UP = (0, -1)

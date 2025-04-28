@@ -3,7 +3,6 @@ import heapq
 from constants import DIRECTIONS
 
 def heuristic(pos, goal):
-    """Manhattan distance heuristic"""
     return abs(pos[0] - goal[0]) + abs(pos[1] - goal[1])
 
 class SearchAlgorithms:
@@ -16,20 +15,17 @@ class SearchAlgorithms:
         self.nodes_expanded = 0
     
     def reset_stats(self):
-        """Reset search statistics"""
         self.visited_nodes = set()
         self.frontier_nodes = set()
         self.nodes_expanded = 0
     
     def is_valid_move(self, pos):
-        """Check if a position is valid (inside maze and not a wall)"""
         x, y = pos
         if 0 <= x < self.maze_width and 0 <= y < self.maze_height:
             return self.maze[y][x] == 0
         return False
 
     def get_neighbors(self, pos):
-        """Get valid neighboring positions"""
         x, y = pos
         neighbors = []
         for dx, dy in DIRECTIONS:
@@ -39,10 +35,9 @@ class SearchAlgorithms:
         return neighbors
 
     def bfs_search(self, start, foods):
-        """Breadth-First Search algorithm"""
         self.reset_stats()
-        
-        # If no food, return empty path
+
+        # if no food
         if not foods:
             return [], 0, True, False
         
